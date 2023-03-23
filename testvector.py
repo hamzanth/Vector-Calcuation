@@ -80,9 +80,12 @@ def convert_string(res):
 		result = result + " "
 	return result
 
-vector1 = "4j"
-vector2 = "3i - 6j + 3k" 
-vector3 = "2i + j -8k" 
+print(############ A PROGRAM TO CALCULATE ADDITION AND SUBTRACTION OF VECTORS ################)
+#vector1 = "4j"
+#vector2 = "3i - 6j + 3k" 
+#vector3 = "2i + j -8k"
+vector1 = input("Enter the first Vector ==> ")
+vector2 = input("Enter the second Vector ==> ") 
 result = list()
 
 vector1 = sanitize(sanitize_input(vector1))

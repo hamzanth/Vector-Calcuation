@@ -127,30 +127,49 @@ def convert_string(res):
 				
 		result = result + " "
 	return result
+def sub_vector(vect1, vect2):
+	result = list()
+	for i in range(3):
+		result.append(vect1[i] - vect2[i])
+	return result
+
+def multiply_vector(vectnum2, vectnum1):
+	first_calc = (vectnum2[1]  * vectnum1[2]) - (vectnum2[2] * vectnum1[1])
+	second_calc = -1 * ((vectnum2[0] * vectnum1[2]) - (vectnum2[2] * vectnum1[0]))
+	third_calc = (vectnum2[0] * vectnum1[1]) - (vectnum2[1] * vectnum1[0])
+	final_answer_list = [first_calc, second_calc, third_calc]
+	return final_answer_list
+
+def get_ul(ov_list, vect_sqrt):
+	inv_sqrt = 1/vect_sqrt
+	res = list()
+	for i in range(3):
+		res.append(ov_list * inv_sqrt)
+	return res
 
 def main():
-	print(############ A PROGRAM TO CALCULATE THE MOMENT OF A VECTOR ################)
-	#vector1 = "4i - 10j + 14k"
-	#vector2 = "-4, 2, 2"
-	vector1 = input("Enter the vector ==> ")
-	vector2 = input("Enter the moment ==> ")
-	#print(f"The vector is {vector1}")
-	first_sign, second_sign = get_vector_sign(vector1)
-	vector1 = sanitize_input(vector1)
-	vectnum1 = get_vector1(vector1)
-	vectnum2 = get_vector2(vector2)
-	vectnum1 = first_second_sign(vectnum1, first_sign, second_sign)
-	print(f"The vectnum1 = {vectnum1}")
-	print(f"The vectnum2 = {vectnum2}")
-	print(["6", "7"])
-			#[ i   j   k]
-			#[-4,  2,  2]
-			#[ 4 -10  14]
-	first_calc = str((vectnum2[1]  * vectnum1[2]) - (vectnum2[2] * vectnum1[1])) + "i" 
-	second_calc = str(-1 * ((vectnum2[0] * vectnum1[2]) - (vectnum2[2] * vectnum1[0]))) + "j"
-	third_calc = str((vectnum2[0] * vectnum1[1]) - (vectnum2[1] * vectnum1[0])) + "k"
-	final_answer_list = [first_calc, second_calc, third_calc]
-	print(convert_string(final_answer_list))
+	r1 = "-4, 1, -5"
+	r2 = "-2, -3, -4"
+	force = "10i + 4j - 8k"
+	force = sanitize_input(force)
+	fsign, ssign = get_vector_sign(force)
+	force_list = first_second_sign(get_vector1(force), fsign, ssign)
+	pr1 = get_vector2(r1)
+	pr2 = get_vector2(r2)
+	rprime = sub_vector(pr1, pr2)
+	mp = multiply_vector(rprime, force_list) 
+
+	other_vector = "3i - 4j + 5k"
+	other_vector = sanitize_input(other_vector)
+	ofsign, ossign = get_vector_sign(other_vector)
+	other_vector = get_vector1(other_vector)
+	ov_list = first_second_sign(other_vector, ofsign, ossign)
+	
+	vect_sum = sum(pow(num, 2) for num in ov_list)
+	vect_sqrt = math.sqrt(vect_sum)
+	print(f"vect_sqrt is {vect_sqrt}"
+	ul = get_ul(ov_list, vect_sqrt)
+	
 
 if __name__ == "__main__":
 	main()

@@ -128,29 +128,92 @@ def convert_string(res):
 		result = result + " "
 	return result
 
+def get_user_input():
+	qlist = list()
+	while True:
+		vect = input("Enter the vector ==> ")
+		qlist.append(vect)
+		prompt = input("any other vector ?. press y for yes or  n for no ==> ")
+		if "y" in prompt or "Y" in prompt:
+			continue
+		else:
+			break
+	return qlist
+
+def sanitize(vector):
+	splt = vector.split(" ")
+	if len(splt) == 1:
+		if "i" in vector:
+			vect = vector + " + 0j + 0k" 
+		elif "j" in vector:
+			if "-" in vector:
+				vect = "0i - " + vector[1:] + " + 0k"
+			else:
+				vect = "0i + " + vector + " + 0k"
+		elif "k" in vector:
+			if "-" in vector:
+				vect = "0i + 0j - " + vector[1:]
+			else:
+				vect = "0i + 0j + " + vector
+	elif len(splt) == 3:
+		#print("The 2 if condition")
+		if "i" not in vector:
+			if vector.split(" ")[0][0] == "-":
+				vect = "0i - " + vector[1:]
+			else:
+				vect = "0i + " + vector
+		elif "j" not in vector:
+			vect = ""
+			for index, ve in enumerate(vector.split(" ")):
+				if index == 0:
+					vect += ve + " +"   #"3i + 4k"
+				elif index == 1:
+					vect += "0j"
+				else:
+					vect += vector.split(" ")[1] + " " + vector.split(" ")[2]
+				vect += " "
+		elif "k" not in vector:
+			vect = vector + "+ 0k"
+	else:
+		vect = vector
+	return vect
+
+
+def san_all_vectors(vector_list):
+	res = list()
+	for vect in vector_list:
+		res.append(sanitize_input(vect))
+	return res
+
+def get_strp_list(sanit_question):
+	res = list()
+	for item in sanit_question:
+		res.append(get_vector1(item))
+	return res
+def get_final_list(vector_lists):
+	result = list()
+	for lis in vector_lists:
+		vect_sum = sum(pow(num, 2) for num in lis)
+		vect_sqrt = math.sqrt(vect_sum)
+		result.append(vect_sqrt)	
+	return result
+
+
 def main():
-	print(############ A PROGRAM TO CALCULATE THE MOMENT OF A VECTOR ################)
-	#vector1 = "4i - 10j + 14k"
-	#vector2 = "-4, 2, 2"
-	vector1 = input("Enter the vector ==> ")
-	vector2 = input("Enter the moment ==> ")
-	#print(f"The vector is {vector1}")
-	first_sign, second_sign = get_vector_sign(vector1)
-	vector1 = sanitize_input(vector1)
-	vectnum1 = get_vector1(vector1)
-	vectnum2 = get_vector2(vector2)
-	vectnum1 = first_second_sign(vectnum1, first_sign, second_sign)
-	print(f"The vectnum1 = {vectnum1}")
-	print(f"The vectnum2 = {vectnum2}")
-	print(["6", "7"])
-			#[ i   j   k]
-			#[-4,  2,  2]
-			#[ 4 -10  14]
-	first_calc = str((vectnum2[1]  * vectnum1[2]) - (vectnum2[2] * vectnum1[1])) + "i" 
-	second_calc = str(-1 * ((vectnum2[0] * vectnum1[2]) - (vectnum2[2] * vectnum1[0]))) + "j"
-	third_calc = str((vectnum2[0] * vectnum1[1]) - (vectnum2[1] * vectnum1[0])) + "k"
-	final_answer_list = [first_calc, second_calc, third_calc]
-	print(convert_string(final_answer_list))
+	print(############ A PROGRAM TO CALCULATE THE HIGHEST VECTORS ################)
+	question_list = get_user_input()
+	sanit_question = [sanitize(sanitize_input(quest)) for quest in question_list]
+	print(f"sanit_question is {sanit_question}")
+	
+	strp_list = get_strp_list(sanit_question)
+	
+	fresult = get_final_list(strp_list)
+	highest_num = max(fresult)
+	highest_index = fresult.index(highest_num)
+	highest_vector = question_list[highest_index]
+
+	print(f"question_list is {fresult}")
+	print(f"Highest vector is {highest_vector}")
 
 if __name__ == "__main__":
 	main()

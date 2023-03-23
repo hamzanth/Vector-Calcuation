@@ -121,8 +121,10 @@ def convert_string(res):
 	return result
 
 def main():
-	vector = "2i - 3j + 7k"
+	print(############ A PROGRAM TO CALCULATE UNIT VECTOR ################)
+	#vector = "3i - 4j + 5k"
 	#print(f"The vector is {vector1}")
+	vector = input("Enter Vector ==> ")
 	first_sign, second_sign = get_vector_sign(vector)
 	vector = sanitize_input(vector)
 	vectnum = get_vector1(vector)
