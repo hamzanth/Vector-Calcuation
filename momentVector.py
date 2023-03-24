@@ -129,7 +129,7 @@ def convert_string(res):
 	return result
 
 def main():
-	print(############ A PROGRAM TO CALCULATE THE MOMENT OF A VECTOR ################)
+	print("############ A PROGRAM TO CALCULATE THE MOMENT OF A VECTOR ################")
 	#vector1 = "4i - 10j + 14k"
 	#vector2 = "-4, 2, 2"
 	vector1 = input("Enter the vector ==> ")

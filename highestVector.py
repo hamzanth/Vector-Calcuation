@@ -200,7 +200,7 @@ def get_final_list(vector_lists):
 
 
 def main():
-	print(############ A PROGRAM TO CALCULATE THE HIGHEST VECTORS ################)
+	print("############ A PROGRAM TO CALCULATE THE HIGHEST VECTORS ################")
 	question_list = get_user_input()
 	sanit_question = [sanitize(sanitize_input(quest)) for quest in question_list]
 	print(f"sanit_question is {sanit_question}")
